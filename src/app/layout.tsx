@@ -3,7 +3,8 @@ import "~/styles/globals.css";
 import { Inter } from "next/font/google";
 
 import { TRPCReactProvider } from "~/trpc/react";
-import Header from "./_components/header";
+import Header from "~/app/_components/header";
+import { ThemeProvider } from "~/app/_components/theme-provider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,10 +24,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`font-sans ${inter.variable} flex flex-col text-white bg-neutral-900 min-h-screen`}>
+      <body className={`font-sans ${inter.variable} flex flex-col min-h-screen`}>
         <TRPCReactProvider>
-          <Header />
-          {children}
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+            <Header />
+            {children}
+          </ThemeProvider>
         </TRPCReactProvider>
       </body>
     </html>
