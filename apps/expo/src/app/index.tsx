@@ -1,8 +1,18 @@
 import { useState } from "react";
-import { Button, Pressable, Text, TextInput, View } from "react-native";
+import {
+  Button,
+  FlatList,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
+import MapView from "react-native-maps";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Link, Stack } from "expo-router";
-import { FlashList } from "@shopify/flash-list";
+
+// import { FlashList } from "@shopify/flash-list";
 
 import type { RouterOutputs } from "~/utils/api";
 import { api } from "~/utils/api";
@@ -140,9 +150,9 @@ export default function Index() {
           </Text>
         </View>
 
-        <FlashList
+        <FlatList
           data={postQuery.data}
-          estimatedItemSize={20}
+          // estimatedItemSize={20}
           ItemSeparatorComponent={() => <View className="h-2" />}
           renderItem={(p) => (
             <PostCard

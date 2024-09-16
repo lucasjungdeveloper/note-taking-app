@@ -14,6 +14,21 @@ const config = withTurborepoManagedCache(
   ),
 );
 
+// FIX https://github.com/Shopify/flash-list/issues/896
+const ALIASES = {
+  tslib: path.resolve(__dirname, "node_modules/tslib/tslib.es6.js"),
+};
+
+config.resolver.resolveRequest = (context, moduleName, platform) => {
+  // Ensure you call the default resolver.
+  return context.resolveRequest(
+    context,
+    // Use an alias if one exists.
+    ALIASES[moduleName] ?? moduleName,
+    platform,
+  );
+};
+
 // XXX: Resolve our exports in workspace packages
 // https://github.com/expo/expo/issues/26926
 config.resolver.unstable_enablePackageExports = true;
